@@ -27,10 +27,9 @@
             -->
             {% if users %}
               {% for user in users %}
-                    <p>{{users}}</p>
                     <tr>
-                        <td>{{user.name}}</td>
-                        <td> <a href="{{user.url}}">{{user.url}}</a> </td>
+                        <td>{{user[0]}}</td>
+                        <td> <a href="{{user[1]}}">{{user[1]}}</a> </td>
                     </tr>
                 {% endfor %}
             {% endif %}
