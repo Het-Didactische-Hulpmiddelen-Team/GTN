@@ -33,7 +33,7 @@ def overview():
     cursor = mysql.connection.cursor()
     cursor.execute("SELECT * FROM gtn")
     users = cursor.fetchall()
-    return render_template('overview.html', users)
+    return render_template('overview.html', users=users)
 
 if __name__ == "__main__":
     app.run(host= '0.0.0.0', debug = True)
