@@ -19,8 +19,8 @@ def main():
 @app.route("/add", methods=['POST'])
 def add():
     _name = request.form['name']
-    _url = request.form['url']
-    re.sub(r'.*github', 'github', _url)
+    _url = re.sub(r'.*github', 'github', request.form['url'])
+
     if _name and _url:
         cursor = mysql.connection.cursor()
         cursor.execute("INSERT INTO gtn(name, url) VALUES (%s, %s)", (_name, _url))
