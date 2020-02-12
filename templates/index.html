@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/main.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Naam registratie</title>
+</head>
+<body>
+    <h1 class="text-center display-2 my-3">Link je Github account</h1>
+    <br>
+    <div class="row-md-6 d-flex justify-content-center vertical-center mt-5">
+
+        <form class="text-center col-md-4">
+            <div class="form-group">
+              <label for="inputName">Naam</label>
+              <input type="text" class="form-control" id="inputName" placeholder="E.g. John Doe" name="name">
+            </div>
+            
+            <div class="form-group">
+              <label for="inputUrl">Github url</label>
+              <input type="text" class="form-control" id="inputUrl" placeholder="E.g. https://github.com/user-name" pattern=".*github.com\/[\w\d-]{4,39}$" name="url" >
+            </div>
+
+            <button type="submit" id="btn-submit" class="btn btn-dark">Submit</button>
+        </form>
+
+    </div>
+</body>
+</html>
