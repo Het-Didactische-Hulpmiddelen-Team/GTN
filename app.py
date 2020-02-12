@@ -1,3 +1,4 @@
+import re
 from flask import Flask, render_template, request, json
 from flask_mysqldb import MySQL
 
@@ -19,6 +20,7 @@ def main():
 def add():
     _name = request.form['name']
     _url = request.form['url']
+    re.sub(r'.*github', 'github', _url)
     if _name and _url:
         cursor = mysql.connection.cursor()
         cursor.execute("INSERT INTO gtn(name, url) VALUES (%s, %s)", (_name, _url))
