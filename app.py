@@ -20,8 +20,6 @@ def add():
     _name = request.form['name']
     _url = request.form['url']
     cursor = mysql.connection.cursor()
-    print(_url)
-    print(_name)
     if _name and _url:
         cursor.execute("INSERT INTO gtn(name, url) VALUES (%s, %s)", (_name, _url))
         mysql.connection.commit()
