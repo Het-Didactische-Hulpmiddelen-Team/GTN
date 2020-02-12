@@ -7,9 +7,11 @@ $(function() {
             type: 'POST',
             success: function(response) {
                 console.log(response);
+                console.log($('form').serialize());
             },
             error: function(error) {
                 console.log(error);
+                console.log($('form').serialize());
             }
         });
     });
