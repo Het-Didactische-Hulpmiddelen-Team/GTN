@@ -23,11 +23,11 @@ def add():
     print(_url)
     print(_name)
     if _name and _url:
-        cursor.execute("INSERT INTO MyUsers(name, url) VALUES (%s, %s)", (_name, _url))
+        cursor.execute("INSERT INTO gtn(name, url) VALUES (%s, %s)", (_name, _url))
         mysql.connection.commit()
         cursor.close()
         return render_template("success.html")
-    return render_template("idnex.html")
+    return render_template("index.html")
 
 
 @app.route("/overview")
