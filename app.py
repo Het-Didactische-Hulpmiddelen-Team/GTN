@@ -2,17 +2,14 @@ from flask import Flask, render_template, request, json
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
-mysql = MySQL()
 
 # MySQL configurations
-app.config['MYSQL_DATABASE_USER'] = 'dht'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'mvghetdhtmvghetdht'
-app.config['MYSQL_DATABASE_DB'] = 'dht'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-mysql.init_app(app)
+app.config['MYSQL_USER'] = 'dht'
+app.config['MYSQL_PASSWORD'] = 'mvghetdhtmvghetdht'
+app.config['MYSQL_DB'] = 'dht'
+app.config['MYSQL_HOST'] = 'localhost'
 
-conn = mysql.connect()
-cursor = conn.cursor()
+mysql = MySQL(app)
 
 @app.route("/")
 def main():
@@ -22,19 +19,14 @@ def main():
 def add():
     _name = request.form['name']
     _url = request.form['url']
+    cursor = mysql.connection.cursor()
 
     if _name and _url:
-        cursor.callproc('sp_adduser', (_name, _url))
-        data = cursor.fetchall()
-
-        if len(data) is 0:
-            conn.commit()
-            return json.dumps({'message': 'User created successfully !'})
-        else:
-            return json.dumps({'error': str(data[0])})
-
-    else:
-        return json.dumps({'html': '<span>Enter the required fields</span>'})
+        cursor.execute("INSERT INTO MyUsers(name, url) VALUES (%s, %s)", (_name, _url))
+        mysql.connection.commit()
+        cursor.close()
+        return render_template("success.html")
+    return render_template("idnex.html")
 
 
 @app.route("/overview")
