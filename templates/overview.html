@@ -23,7 +23,17 @@
                 <td>Stijn Taelemans</td>
                 <td> <a href="https://github.com/lem-onade">github.com/lem-onade</a> </td>
             </tr>
+
             -->
+            {% if users %}
+              {% for user in users %}
+                    <p>{{users}}</p>
+                    <tr>
+                        <td>{{user.name}}</td>
+                        <td> <a href="{{user.url}}">{{user.url}}</a> </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
         </tbody>
 
     </table>
