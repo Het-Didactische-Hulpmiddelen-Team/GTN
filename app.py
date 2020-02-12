@@ -10,7 +10,6 @@ app.config['MYSQL_DB'] = 'dht'
 app.config['MYSQL_HOST'] = 'localhost'
 
 mysql = MySQL(app)
-cursor = mysql.connection.cursor()
 
 @app.route("/")
 def main():
@@ -21,6 +20,7 @@ def add():
     _name = request.form['name']
     _url = request.form['url']
     if _name and _url:
+        cursor = mysql.connection.cursor()
         cursor.execute("INSERT INTO gtn(name, url) VALUES (%s, %s)", (_name, _url))
         mysql.connection.commit()
         cursor.close()
@@ -30,6 +30,7 @@ def add():
 
 @app.route("/overview")
 def overview():
+    cursor = mysql.connection.cursor()
     cursor.execute("SELECT * FROM gtn")
     users = cursor.fetchall()
     return render_template('overview.html', users)
