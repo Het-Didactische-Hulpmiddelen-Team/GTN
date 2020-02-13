@@ -40,7 +40,7 @@ def overview():
 @app.route("/name/<name>")
 def get_name(name):
     cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM gtn WHERE name like %s", ["%"+name+"%"])
+    cursor.execute("SELECT * FROM gtn WHERE name REGEXP 'github.com/%s$'", [name])
     user = cursor.fetchall()
     return jsonify(user)
 
