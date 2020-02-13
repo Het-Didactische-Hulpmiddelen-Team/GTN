@@ -40,16 +40,16 @@ def overview():
 @app.route("/name/<name>")
 def get_name(name):
     cursor = mysql.connection.cursor()
-    query = "SELECT * FROM gtn WHERE name like %%s%"
-    cursor.execute(query % name)
+    query = "SELECT * FROM gtn WHERE name like %%%s%%" % name
+    cursor.execute(query)
     user = cursor.fetchall()
     return jsonify(user)
 
 @app.route("/user/<username>")
 def get_username(username):
     cursor = mysql.connection.cursor()
-    query = "SELECT * FROM gtn WHERE url like %%s%"
-    cursor.execute(query % username)
+    query = "SELECT * FROM gtn WHERE url like %%%s%%" % username
+    cursor.execute(query)
     user = cursor.fetchall()
     return jsonify(user)
 
