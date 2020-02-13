@@ -1,5 +1,5 @@
 import re
-from flask import Flask, render_template, request, json
+from flask import Flask, render_template, request, json, jsonify
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -36,6 +36,22 @@ def overview():
     cursor.execute("SELECT * FROM gtn")
     users = cursor.fetchall()
     return render_template('overview.html', users=users)
+
+@app.route("/name/<name>")
+def get_name(name):
+    cursor = mysql.connection.cursor()
+    query = "SELECT * FROM gtn WHERE name like %%s%"
+    cursor.execute(query % name)
+    user = cursor.fetchall()
+    return jsonify(user)
+
+@app.route("/user/<username>")
+def get_username(username):
+    cursor = mysql.connection.cursor()
+    query = "SELECT * FROM gtn WHERE url like %%s%"
+    cursor.execute(query % username)
+    user = cursor.fetchall()
+    return jsonify(user)
 
 if __name__ == "__main__":
     app.run(host= '0.0.0.0', debug = True)
