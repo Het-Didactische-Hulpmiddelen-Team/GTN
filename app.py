@@ -33,7 +33,7 @@ def add():
 @app.route("/overview")
 def overview():
     cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM gtn")
+    cursor.execute("SELECT * FROM gtn order by name")
     users = cursor.fetchall()
     return render_template('overview.html', users=users)
 
