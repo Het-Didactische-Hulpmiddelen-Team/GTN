@@ -22,7 +22,7 @@ def add():
     _url = re.sub(r'.*github', 'github', request.form['url'])
 
     if _name and _url:
-        cursor = mysql.connection.cursor(prepared=True)
+        cursor = mysql.connection.cursor()
         cursor.execute("INSERT INTO gtn(name, url) VALUES (%s, %s)", (_name, _url))
         mysql.connection.commit()
         cursor.close()
@@ -32,24 +32,22 @@ def add():
 
 @app.route("/overview")
 def overview():
-    cursor = mysql.connection.cursor(prepared=True)
+    cursor = mysql.connection.cursor()
     cursor.execute("SELECT * FROM gtn order by name")
     users = cursor.fetchall()
     return render_template('overview.html', users=users)
 
 @app.route("/name/<name>")
 def get_name(name):
-    cursor = mysql.connection.cursor(prepared=True)
-    query = "SELECT * FROM gtn WHERE name like '%%%s%%'" % name
-    cursor.execute(query)
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT * FROM gtn WHERE name like '%%%s%%'", name)
     user = cursor.fetchall()
     return jsonify(user)
 
 @app.route("/user/<username>")
 def get_username(username):
-    cursor = mysql.connection.cursor(prepared=True)
-    query = "SELECT * FROM gtn WHERE url like '%%%s%%'" % username
-    cursor.execute(query)
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT * FROM gtn WHERE url like '%%%s%%'", username)
     user = cursor.fetchall()
     return jsonify(user)
 
