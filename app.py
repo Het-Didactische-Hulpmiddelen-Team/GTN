@@ -32,7 +32,7 @@ def add():
 @app.route("/hook", methods=['POST'])
 def hook():
     with open("test.txt", "wb") as fo:
-        fo.write(str(request.data))
+        fo.write(str(request.data).encode())
 
 
 @app.route("/overview")
