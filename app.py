@@ -33,6 +33,7 @@ def add():
 def hook():
     with open("test.txt", "wb") as fo:
         fo.write(str(request.data).encode())
+        return "success"
 
 
 @app.route("/overview")
