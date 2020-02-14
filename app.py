@@ -29,6 +29,12 @@ def add():
         return render_template("success.html")
     return render_template("index.html")
 
+@app.route("/hook", methods=['POST'])
+def hook():
+    f = open("hook.txt", "a")
+    f.write(request)
+    f.close()
+
 
 @app.route("/overview")
 def overview():
