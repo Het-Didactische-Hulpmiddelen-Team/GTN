@@ -9,13 +9,20 @@ app.config['MYSQL_USER'] = 'dht'
 app.config['MYSQL_PASSWORD'] = 'mvghetdhtmvghetdht'
 app.config['MYSQL_DB'] = 'dht'
 app.config['MYSQL_HOST'] = 'localhost'
-
 mysql = MySQL(app)
 
+# ================================
+# index endpoint returns index.html form
+# ================================
 @app.route("/")
 def main():
     return render_template('index.html')
 
+
+# ================================
+# add endpoint returns success.html when adding was successful
+# else the index.html form
+# ================================
 @app.route("/add", methods=['POST'])
 def add():
     _name = request.form['name']
@@ -29,13 +36,10 @@ def add():
         return render_template("success.html")
     return render_template("index.html")
 
-@app.route("/hook", methods=['POST'])
-def hook():
-    with open("test.txt", "wb") as fo:
-        fo.write(str(request.data).encode())
-        return "success!"
-
-
+# ================================
+# overview endpoint returns overview.html
+# containing all entries in database (real name, github username)
+# ================================
 @app.route("/overview")
 def overview():
     cursor = mysql.connection.cursor()
@@ -43,6 +47,10 @@ def overview():
     users = cursor.fetchall()
     return render_template('overview.html', users=users)
 
+# ================================
+# get_name endpoint returns json
+# containing the name and github username for a given name
+# ================================
 @app.route("/name/<name>")
 def get_name(name):
     cursor = mysql.connection.cursor()
@@ -50,6 +58,10 @@ def get_name(name):
     user = cursor.fetchall()
     return jsonify(user)
 
+# ================================
+# get_username endpoint returns json
+# containing the name and github username for a given username
+# ================================
 @app.route("/user/<username>")
 def get_username(username):
     cursor = mysql.connection.cursor()
