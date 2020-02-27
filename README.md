@@ -23,10 +23,10 @@ Allows for easy translation between the real name of UCLL students and their Git
 * **/overview [GET]**
   Lists all entries in the MySQL database
 
-* **/name/<real-name> [GET]**
+* **/name/real-name [GET]**
   Returns name and username for a given `<real-name>`
   
-* **/user/<username> [GET]**
+* **/user/username [GET]**
   Returns name and username for a given `<username>`
 
 
