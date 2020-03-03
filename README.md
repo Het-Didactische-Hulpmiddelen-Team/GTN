@@ -8,7 +8,7 @@ Allows for easy translation between the real name of UCLL students and their Git
 ## Usage
 1. Install required modules listed in requirements.txt using `pip install -r requirements.txt`
 1. Run the app using `python3 app.py`
-    * Default port: 82
+    * Default port: 82 (This can be changed on the last line of app.py)
     * Endpoints: see below
 
 
