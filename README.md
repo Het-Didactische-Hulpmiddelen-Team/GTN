@@ -28,8 +28,3 @@ Allows for easy translation between the real name of UCLL students and their Git
   
 * **/user/username [GET]**
   Returns name and username for a given `<username>`
-
-
-
-
-Made by the offical "Didactical Aids Team"
